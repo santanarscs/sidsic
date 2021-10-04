@@ -1,10 +1,14 @@
-import { Layout } from '../components/Layout'
+import { GetServerSideProps } from 'next'
 
-export default function Home() {
-  return (
-    <Layout title="Pagina inicial">
-      <h1>Página inicial</h1>
-      
-    </Layout>
-  )
+export default function Index(){
+  return null
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  return { 
+    redirect: {
+      destination: '/dashboard',
+      permanent: true
+    }
+  }
 }

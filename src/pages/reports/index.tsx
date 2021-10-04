@@ -12,7 +12,7 @@ const reports = [
 export default function Report() {
   return (
     <Layout title="Relatórios">
-      <div className="flex justify-between items-center mb-4">
+      <div className="mx-4 flex justify-between items-center mb-4">
         <h1 className="text-2xl text-gray-700 ">Relatórios</h1>
         <Link href="/reports/new">
         <a className=" px-4 py-2 bg-blue-500 text-white uppercase tracking-wider shadow-sm rounded-sm hover:bg-blue-400 transition-colors">
@@ -20,7 +20,7 @@ export default function Report() {
         </a>
         </Link>
       </div>
-      <div className="bg-white shadow-md p-4 rounded-sm">
+      <div className="mx-4 bg-white shadow-md p-4 rounded-sm">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100">
             <tr>
