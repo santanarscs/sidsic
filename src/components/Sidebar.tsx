@@ -1,4 +1,4 @@
-import { HomeIcon, DocumentReportIcon, DatabaseIcon } from '@heroicons/react/outline'
+import { HomeIcon, DocumentReportIcon, DatabaseIcon, MapIcon } from '@heroicons/react/outline'
 import { ActiveLink } from './ActiveLink'
 function Sidebar() {
   return (
@@ -26,6 +26,14 @@ function Sidebar() {
               <a className="flex ml-4 py-2">
                 <DocumentReportIcon className="h-6 w-6" />
                 <span className="ml-4 font-medium">Relatórios</span>
+              </a>
+            </ActiveLink>
+          </li>
+          <li>
+            <ActiveLink href="/maps" passHref>
+              <a className="flex ml-4 py-2">
+                <MapIcon className="h-6 w-6" />
+                <span className="ml-4 font-medium">Mapa</span>
               </a>
             </ActiveLink>
           </li>
