@@ -2,11 +2,11 @@ import { Layout } from "../../components/Layout";
 import Link from 'next/link'
 
 const reports = [
-  {id: 1, initialData: Date.now(), finishDate: Date.now(), type: 'BARRAGENS', isOpen: 'Aberto'},
-  {id: 2, initialData: Date.now(), finishDate: Date.now(), type: 'RODOVIAS', isOpen: 'Aberto'},
-  {id: 3, initialData: Date.now(), finishDate: Date.now(), type: 'TELECOMUNICAÇÕES', isOpen: 'Concluído'},
-  {id: 4, initialData: Date.now(), finishDate: Date.now(), type: 'ÁGUAS', isOpen: 'Concluído'},
-  {id: 5, initialData: Date.now(), finishDate: Date.now(), type: 'BARRAGENS', isOpen: 'Concluído'},
+  {id: 1, title: 'Relatório de barragens 2021.2', initialData: '18/07/2021', finishDate: '', type: 'BARRAGENS', isOpen: 'Aberto'},
+  {id: 2, title: 'Relatório de rodovias 2021.1', initialData: '20/07/2021', finishDate: '', type: 'RODOVIAS', isOpen: 'Aberto'},
+  {id: 3, title: 'Relatório de telecomunicações 2021.1', initialData: '23/07/2021', finishDate: '01/10/2021', type: 'TELECOMUNICAÇÕES', isOpen: 'Concluído'},
+  {id: 4, title: 'Relatório de águas 2021.1', initialData: '15/06/2021', finishDate: '23/09/2021', type: 'ÁGUAS', isOpen: 'Concluído'},
+  {id: 5, title: 'Relatório de barragens 2021.1', initialData: '01/06/2021', finishDate: '01/07/2021', type: 'BARRAGENS', isOpen: 'Concluído'},
 ]
 
 export default function Report() {
@@ -24,6 +24,7 @@ export default function Report() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-100">
             <tr>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Título</th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data de Inicio</th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data de conclusão</th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo</th>
@@ -33,6 +34,7 @@ export default function Report() {
           <tbody className="bg-white divide-y divide-gray-200 text-gray-700">
             {reports.map(report => (
               <tr key={report.id}>
+                <td className="px-6 py-3">{report.title}</td>
                 <td className="px-6 py-3">{report.initialData}</td>
                 <td className="px-6 py-3">{report.finishDate}</td>
                 <td className="px-6 py-3">{report.type}</td>

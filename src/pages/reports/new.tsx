@@ -1,25 +1,66 @@
 import { useState } from "react";
 import { RichText } from "../../components/Forms/RichText";
-import { Upload } from "../../components/Forms/UploadFile";
 import { Layout } from "../../components/Layout";
-
+import axios from 'axios'
+import { FileInputButton } from "../../components/Forms/FileInputButton";
 export default function NewReport() {
   const [step, setStep] = useState(1)
+  const [data, setData] = useState([])
+  const [header, setHeader] = useState([])
 
-  function submitFile(files: File[]): void {
-    const newFiles = files.map((file) => ({
-      file,
-      name: file.name,
-      readableSize: String(file.size),
-    }));
-    console.log(newFiles)
-  }
+  const onChange = async (formData: FormData) => {
+    const config = {
+      headers: { 'content-type': 'multipart/form-data' },
+      onUploadProgress: (event: any) => {
+        console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
+      },
+    };
+
+    const response = await axios.post('/api/uploads', formData, config);
+
+    const { header, data } = response.data
+    setHeader(header)
+    setData(data)
+  };
+
+
 
   function renderUploadFile() {
     return (
       <div>
-        <h3 className="text-xl text-gray-700 my-2">Faça o upload da tabela com as infraestruturas</h3>
-        <Upload onUpload={submitFile} />
+        <div className="flex flex-col w-full my-3">
+          <label htmlFor="" className="text-gray-800 mb-1">Título</label>
+          <input type="text" className="rounded-sm relative w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-800 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"/>
+        </div>
+        {data.length ? (
+          <div>
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-100">
+                <tr>
+                  {header.map(item => <th key={item} scope="col" className="p-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{item}</th>)}
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200 text-gray-700">
+                {data.map((item, index) => (
+                  <tr key={`${item}-${index}`}>
+                    {header.map(itemValue => (
+                      <td className="px-3 py-2" key={`${itemValue}-${index}-data`}>{item[itemValue]}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <>
+              <label className="text-gray-800 my-2">Faça o upload da tabela com as infraestruturas</label>
+              <FileInputButton
+                label="Upload do arquivo"
+                uploadFileName="files"
+                onChange={onChange}
+              />
+          </>
+        )}
       </div>
     )
   }
