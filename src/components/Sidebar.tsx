@@ -2,7 +2,7 @@ import { HomeIcon, DocumentReportIcon, DatabaseIcon, MapIcon } from '@heroicons/
 import { ActiveLink } from './ActiveLink'
 function Sidebar() {
   return (
-    <div className="w-64 bg-white">
+    <div className="w-60 bg-white">
       <div>
         <ul className="mt-10 space-y-4">
           <li>
