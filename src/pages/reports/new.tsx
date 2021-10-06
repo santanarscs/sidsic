@@ -3,12 +3,19 @@ import { RichText } from "../../components/Forms/RichText";
 import { Layout } from "../../components/Layout";
 import axios from 'axios'
 import { FileInputButton } from "../../components/Forms/FileInputButton";
+
+
+type Response = {
+  header: string[],
+  data: any[],
+}
+
 export default function NewReport() {
   const [step, setStep] = useState(1)
-  const [data, setData] = useState([])
-  const [header, setHeader] = useState([])
+  const [data, setData] = useState<string[]>([])
+  const [header, setHeader] = useState<any[]>([])
 
-  const onChange = async (formData: FormData) => {
+  const onChange = async (formData: any) => {
     const config = {
       headers: { 'content-type': 'multipart/form-data' },
       onUploadProgress: (event: any) => {
@@ -16,8 +23,9 @@ export default function NewReport() {
       },
     };
 
-    const response = await axios.post('/api/uploads', formData, config);
+    const response = await axios.post<Response>('/api/uploads', formData, config);
 
+    
     const { header, data } = response.data
     setHeader(header)
     setData(data)

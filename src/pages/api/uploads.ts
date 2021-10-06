@@ -47,7 +47,7 @@ apiRoute.post(async (req: ApiRequest, res: NextApiResponse<Response>) => {
       header: Object.keys(data[0]),
       data
     });
-  } catch(e) {
+  } catch(e: any) {
     res.status(400).json(e)
   }
 });

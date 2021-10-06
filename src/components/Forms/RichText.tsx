@@ -5,7 +5,6 @@ const Editor = dynamic(
   () => import('react-draft-wysiwyg').then(mod => mod.Editor) as any,
   { ssr: false }
 )
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 function RichText() {
   const [editorState, setEditorState ] = useState<EditorState | undefined>(EditorState.createEmpty())
   const onEditorStateChange = (editorState: EditorState) => {
@@ -14,6 +13,7 @@ function RichText() {
   return (
     <div>
       <Editor 
+      // @ts-expect-error
         editorState={editorState}
         onEditorStateChange={onEditorStateChange}
         toolbarClassName="justify-center"
