@@ -1,6 +1,7 @@
 import { Layout } from "../../components/Layout";
 import Link from 'next/link'
 import { SearchIcon } from "@heroicons/react/outline";
+import { Pagination } from '../../components/Pagination'
 const databases = [
   { id: 1, totalCount: 20293, type: 'BARRAGEM', lastUpdate: '23/07/2021' },
   { id: 2, totalCount: 10343, type: 'ÁGUAS', lastUpdate: '28/08/2021'},
@@ -43,6 +44,11 @@ export default function index() {
             ))}
           </tbody>
         </table>
+        <Pagination 
+          totalCountOfRegisters={100}
+          currentPage={1}
+          onPageChange={() => console.log('testing')}
+        />
       </div>
     </Layout>
   )

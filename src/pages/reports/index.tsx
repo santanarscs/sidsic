@@ -1,6 +1,7 @@
 import { Layout } from "../../components/Layout";
 import Link from 'next/link'
 import { PencilIcon, PrinterIcon, SearchIcon, TrashIcon } from "@heroicons/react/outline";
+import { Pagination } from "../../components/Pagination";
 
 const reports = [
   {id: 1, title: 'Relatório de barragens 2021.2', initialData: '18/07/2021', finishDate: '', type: 'BARRAGENS', isOpen: 'Aberto'},
@@ -78,6 +79,11 @@ export default function Report() {
             ))}
           </tbody>
         </table>
+        <Pagination 
+          totalCountOfRegisters={100}
+          currentPage={1}
+          onPageChange={() => console.log('testing')}
+        />
       </div>
     </Layout>
   )
