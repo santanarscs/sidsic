@@ -28,20 +28,28 @@ type Response = {
   data: any[]
 }
 
-// Process a POST request
-apiRoute.post(async (req: NextApiRequest, res: NextApiResponse<Response>) => {
-  const filePath = req.files[0].path
-  const fileContent = await fs.promises.readFile(filePath);
-  const data = csvParse(fileContent, {
-    columns: true,
-    delimiter: ';'
-  });
- await fs.promises.unlink(filePath);
+interface ApiRequest extends NextApiRequest {
+  files: any
+}
 
-  res.status(200).json({
-    header: Object.keys(data[0]),
-    data
-   });
+// Process a POST request
+apiRoute.post(async (req: ApiRequest, res: NextApiResponse<Response>) => {
+  try {
+    const filePath = req.files[0].path
+    const fileContent = await fs.promises.readFile(filePath);
+    const data = csvParse(fileContent, {
+      columns: true,
+      delimiter: ';'
+    });
+  await fs.promises.unlink(filePath);
+
+    res.status(200).json({
+      header: Object.keys(data[0]),
+      data
+    });
+  } catch(e) {
+    res.status(400).json(e)
+  }
 });
 
 export default apiRoute;
