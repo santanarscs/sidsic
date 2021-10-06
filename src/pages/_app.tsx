@@ -3,12 +3,8 @@ import { useRouter } from 'next/router'
 import type { AppProps } from 'next/app'
 import { AnimatePresence } from 'framer-motion'
 import '../styles/global.css'
-import 'leaflet/dist/leaflet.css';
 import NProgress from 'nprogress'
 import '../styles/nprogress.css'
-
-
-
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
