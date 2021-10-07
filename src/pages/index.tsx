@@ -1,14 +1,32 @@
-import { GetServerSideProps } from 'next'
+import { useKeycloak } from "@react-keycloak/ssr";
+import { KeycloakInstance } from "keycloak-js";
 
-export default function Index(){
-  return null
-}
+import { useEffect } from "react";
+import Router from 'next/router';
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  return { 
-    redirect: {
-      destination: '/dashboard',
-      permanent: true
+export default function Login() {
+  const { initialized, keycloak } = useKeycloak<KeycloakInstance>()
+
+  const { login = () => {}, authenticated } = keycloak || {};
+  
+  useEffect(() => {
+    if (!initialized) {
+      return;
     }
-  }
+    if (!authenticated) {
+      login();
+    }
+  }, [login, authenticated, initialized])
+
+  useEffect(() => {
+    if(!initialized){
+      return;
+    }
+
+    if (authenticated) {
+      Router.replace('/dashboard');
+    }
+  })
+  
+  return null;
 }

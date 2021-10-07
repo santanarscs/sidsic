@@ -1,12 +1,17 @@
+import type { AppProps, AppContext } from 'next/app'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import type { AppProps } from 'next/app'
+
 import { AnimatePresence } from 'framer-motion'
-import '../styles/global.css'
+import { SSRKeycloakProvider, SSRCookies } from "@react-keycloak/ssr";
 import NProgress from 'nprogress'
+
+import { KEYCLOAK_CONFIG } from "../util/auth";
+import { parseCookies } from "../util/cookies";
+import '../styles/global.css'
 import '../styles/nprogress.css'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, cookies }: AppProps & {cookies: unknown}) {
   const router = useRouter()
 
   useEffect(() => {
@@ -29,10 +34,28 @@ function MyApp({ Component, pageProps }: AppProps) {
     }
   }, [router])
   return (
+    <SSRKeycloakProvider
+      keycloakConfig={KEYCLOAK_CONFIG as any}
+      persistor={SSRCookies(cookies)}
+      initOptions={{
+        onLoad: "check-sso",
+        silentCheckSsoRedirectUri:
+          typeof window !== "undefined"
+            ? `${window.location.origin}/silent-check-sso.html`
+            : null,
+      }}
+    >
     <AnimatePresence exitBeforeEnter>
       <Component {...pageProps} key={router.route} />
-    </AnimatePresence>
+      </AnimatePresence>
+    </SSRKeycloakProvider>
   )
 }
+
+MyApp.getInitialProps = async (appContext: AppContext) => {
+  return {
+    cookie: parseCookies(appContext.ctx.req),
+  };
+};
 
 export default MyApp
