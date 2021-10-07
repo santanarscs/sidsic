@@ -1,5 +1,7 @@
+import { GetServerSideProps } from 'next';
+import React from 'react';
 import { Layout } from '../components/Layout'
-
+import { withAuth } from '../hof/withAuth';
 export default function Home() {
   return (
     <Layout title="Pagina inicial">
@@ -10,3 +12,11 @@ export default function Home() {
     </Layout>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withAuth(async (ctx, {token}) => {
+  return {
+      props: {
+          
+      },
+  };
+});

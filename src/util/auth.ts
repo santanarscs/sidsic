@@ -1,29 +1,15 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { KeycloakProfile, KeycloakTokenParsed } from "keycloak-js";
-import { parseCookies } from "./cookies";
+import { destroyCookie, parseCookies } from "./cookies";
 
-export const KEYCLOAK_CONFIG = {
-  realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM,
-  clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID,
-  url: process.env.NEXT_PUBLIC_KEYCLOAK_URL,
+export const KEYCLOAK_PUBLIC_CONFIG = {
+  realm: process.env.NEXT_PUBLIC_KEYCLOAK_REALM as string,
+  url: process.env.NEXT_PUBLIC_KEYCLOAK_URL as string,
+  clientId: process.env.NEXT_PUBLIC_KEYCLOAK_CLIENT_ID as string,
 };
 
-export function isTokenExpired(token: string) {
-  const payload = getPayload(token);
-
-  const clockTimestamp = Math.floor(Date.now() / 1000);
-
-  return clockTimestamp > payload.exp;
-}
-
-export function getPayload(token: string) {
-  return JSON.parse(
-    Buffer.from(token.split(".")[1], "base64").toString("utf8")
-  );
-}
-
 export type Payload = KeycloakTokenParsed &
-  KeycloakProfile;
+  KeycloakProfile & { subdomain: string };
 
 export type Token = { token: string; payload: Payload };
 
@@ -40,12 +26,17 @@ export function validateAuth(req?: Request): Token | boolean {
     ? ({ token, payload: payloadOrFalse } as any)
     : payloadOrFalse;
 }
-//verificação completa
+
 export function verifyToken(token: string, key: string): JwtPayload | false {
   try {
     return jwt.verify(token, key, { ignoreExpiration: false }) as JwtPayload;
   } catch (e) {
-    console.error(e, token, key);
+    console.error("testeee",e, token, key);
     return false;
   }
+}
+
+export function createAuthCookies() {
+  destroyCookie("kcToken");
+  destroyCookie("kcIdToken");
 }

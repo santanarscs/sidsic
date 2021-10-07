@@ -9,17 +9,6 @@ export function parseCookies(req?: any) {
   return cookie.parse(req.headers.cookie || "");
 }
 
-export function setCookie(
-  key: string,
-  value: string | object,
-  options?: Cookies.CookieAttributes
-) {
-  Cookies.set(key, value, {
-    ...options,
-    secure: process.env.NODE_ENV === "production" ? true : false,
-  });
-}
-
-export function getCookie(key: string){
-    return Cookies.get(key);
+export function destroyCookie(key: string) {
+  Cookies.remove(key);
 }

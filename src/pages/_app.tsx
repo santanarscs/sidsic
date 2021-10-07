@@ -6,7 +6,7 @@ import { AnimatePresence } from 'framer-motion'
 import { SSRKeycloakProvider, SSRCookies } from "@react-keycloak/ssr";
 import NProgress from 'nprogress'
 
-import { KEYCLOAK_CONFIG } from "../util/auth";
+import { KEYCLOAK_PUBLIC_CONFIG } from "../util/auth";
 import { parseCookies } from "../util/cookies";
 import '../styles/global.css'
 import '../styles/nprogress.css'
@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps, cookies }: AppProps & {cookies: unknown})
   }, [router])
   return (
     <SSRKeycloakProvider
-      keycloakConfig={KEYCLOAK_CONFIG as any}
+      keycloakConfig={KEYCLOAK_PUBLIC_CONFIG}
       persistor={SSRCookies(cookies)}
       initOptions={{
         onLoad: "check-sso",
