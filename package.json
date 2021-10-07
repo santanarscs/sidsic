@@ -12,6 +12,7 @@
     "@heroicons/react": "^1.0.4",
     "@react-keycloak/ssr": "^3.3.0",
     "@types/react-leaflet": "^2.8.2",
+    "antd": "^4.16.13",
     "axios": "^0.22.0",
     "classnames": "^2.3.1",
     "cookie": "^0.4.1",
@@ -30,6 +31,7 @@
     "next-connect": "^0.10.2",
     "nprogress": "^0.2.0",
     "react": "17.0.2",
+    "react-awesome-query-builder": "^4.5.2",
     "react-dom": "17.0.2",
     "react-draft-wysiwyg": "^1.14.7",
     "react-leaflet": "3.1.0"

@@ -19,7 +19,6 @@ function Header() {
 
   const parsedToken: ParsedToken | undefined = keycloak?.tokenParsed
 
-  console.log(keycloak)
   return (
     <div className="h-14 w-full flex items-center">
       <div className="p-4 mx-4 w-full flex items-center justify-end ml-auto  text-gray-700">

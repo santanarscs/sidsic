@@ -33,7 +33,7 @@ export default function index() {
                 <td className="px-6 py-3">{database.totalCount}</td>
                 <td>
                 <td className="px-6 py-3 flex justify-center">
-                  <Link href="">
+                  <Link href={`/databases/${database.id}/detail`}>
                     <a className="bg-blue-500 h-5 w-5 flex items-center justify-center text-white rounded-sm">
                       <SearchIcon className="h-4 w-4" />
                     </a>
