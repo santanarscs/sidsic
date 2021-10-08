@@ -16,10 +16,10 @@ export default function DetailDatabase() {
       </div>
       <div className="mx-4 bg-white shadow-md p-4 rounded-sm mb-4">
         <h2 className="mb-2 text-xl text-bold text-gray-700">Busque da base de dados</h2>
-        <QueryBuilder
+        {/* <QueryBuilder
             fields={metadatas}
             handleSetStateQuery={setStateQuery}
-        />
+        /> */}
         <button onClick={() => setData(['foo', 'bar'])} className="mt-4 bg-blue-500 text-white px-4 py-2 text-bold uppercase hover:bg-blue-400 transition-colors">Gerar consulta</button>
       </div>
       {!!data.length && (

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Query, Builder, BasicConfig, Utils as QbUtils, JsonTree } from 'react-awesome-query-builder'
 import AntdConfig from 'react-awesome-query-builder/lib/config/antd';
-import 'antd/dist/antd.css';
-import 'react-awesome-query-builder/lib/css/styles.css';
-import 'react-awesome-query-builder/lib/css/compact_styles.css';
+// import 'antd/dist/antd.css';
+// import 'react-awesome-query-builder/lib/css/styles.css';
+// import 'react-awesome-query-builder/lib/css/compact_styles.css';
 
 
 
